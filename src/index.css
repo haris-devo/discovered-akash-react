@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* add new local font  */
+@font-face {
+  font-family: "Quanta";
+  src: local(
+    "Quanta",
+    url("../public/QuantaGroteskPro-Regular.woff") format("woff")
+  );
+}
+
+/* use above font in whole body  */
+
+@layer base {
+  html {
+    font-family: , "Quanta", "Helvetica Neue" !important;
+  }
+}
