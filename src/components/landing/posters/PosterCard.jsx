@@ -1,5 +1,3 @@
-import React from "react";
-
 const PosterCard = ({ imageUrl, title, price, discount, rating }) => {
   return (
     <>

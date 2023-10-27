@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import LandingPage from "../components/landing/LandingPage";
 import Navbar from "../components/landing/herosection/Navbar";
 import Configurator from "../components/configurator/components/Configurator";
+import Footer from "../components/footer/Footer";
 
 const Routers = () => {
   return (
@@ -13,6 +14,7 @@ const Routers = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path="/configurator" element={<Configurator />} />
       </Routes>
+      <Footer />
     </>
   );
 };

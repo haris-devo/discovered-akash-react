@@ -20,7 +20,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-white mb-3">
+      <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-white mb-3 font-inter">
         <div className="w-full px-4  flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <Link
@@ -47,7 +47,7 @@ export default function Navbar() {
               {links.map(({ to, icon, label }) => (
                 <li
                   className={`nav-item mx-6 ${
-                    location.pathname === to ? "bg-gray-200" : ""
+                    location.pathname === to ? "text-blue-100" : ""
                   }`}
                   key={label}
                 >
@@ -60,7 +60,15 @@ export default function Navbar() {
                       alt={`${label} Icon`}
                       className="w-3 h-4 "
                     />
-                    <span className=" font-mono">{label}</span>
+                    <span
+                      className={`font-inter ${
+                        location.pathname === to
+                          ? "font-normal text-blue-300"
+                          : ""
+                      }`}
+                    >
+                      {label}
+                    </span>
                   </Link>
                 </li>
               ))}
