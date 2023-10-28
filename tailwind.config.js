@@ -6,8 +6,8 @@ export default {
       backgroundImage: {
         "gradient-new":
           "linear-gradient(to bottom, rgba(57, 191, 249, 1), rgba(67, 136, 238, 1))",
-        "gradient-old":
-          "linear-gradient(to bottom, rgba(67, 136, 238, 1), rgba(57, 191, 249, 1))",
+        "gradient-ltr":
+          " linear-gradient(272.89deg, #2360FC 0%, #49BCFC 50.52%, #1ED6E2 100%)",
       },
       fontFamily: {
         // inter font family
