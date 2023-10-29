@@ -42,7 +42,7 @@ const HeroSection = () => {
           </div>
         </div>
       </section>
-      <div className="relative h-[300px] font-[sans-serif]">
+      <div className="relative h-[50vh] font-[sans-serif]">
         <img
           src="https://readymadeui.com/cardImg.webp"
           alt="Banner Image"
@@ -50,16 +50,13 @@ const HeroSection = () => {
         />
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="absolute inset-0 flex flex-col justify-center items-center text-white  px-6">
-          <h2 className="text-4xl font-bold mb-4">Explore the World</h2>
-          <p className="text-lg text-center mb-6">
-            Embark on unforgettable journeys. Book your dream vacation today!
-          </p>
-          <a
-            href="javascript:void(0)"
-            className="bg-transparent text-white font-semibold py-2 border-2 border-white px-6 rounded hover:bg-white hover:text-black transition duration-300 ease-in-out"
-          >
-            Book Now
-          </a>
+          <div className="mx-auto px-10 flex justify-center w-full">
+            <img
+              src="/public/assets/coupon.png"
+              alt="Banner Image"
+              className="w-4/4 h-[250px] object-cover"
+            />
+          </div>
         </div>
       </div>
     </>

@@ -1,50 +1,59 @@
-import PosterCard from "./PosterCard";
+import { useState } from "react";
+import PosterDetails from "./PosterCard";
 
 const NewPosters = () => {
-  // give me randow array
-  const projectData = [
-    {
-      imageUrl: "https://example.com/image1.jpg",
-      title: "Project 1",
-      price: 10.99,
-      discount: 0.2,
-      rating: 4.5,
-    },
-    {
-      imageUrl: "https://example.com/image2.jpg",
-      title: "Project 2",
-      price: 15.99,
-      discount: 0.1,
-      rating: 4.2,
-    },
-    {
-      imageUrl: "https://example.com/image3.jpg",
-      title: "Project 3",
-      price: 20.99,
-      discount: 0.3,
-      rating: 4.8,
-    },
-  ];
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const categories = ["All", "Wedding", "Birthday", "Couple", "Family", "More"];
 
   return (
-    <div>
-      <h1>New Posters</h1>
-      <div>
-        {projectData.map(() => {
-          return (
-            <PosterCard
-              key={
-                Math.random().toString(36).substring(2, 15) +
-                Math.random().toString(36).substring(2, 15)
-              }
-              imageUrl={projectData.imageUrl}
-              title={projectData.title}
-              price={projectData.price}
-              discount={projectData.discount}
-              rating={projectData.rating}
-            />
-          );
-        })}
+    <div className=" p-20 max-h-auto h-[130vh]">
+      <h1 className="text-5xl font-bold py-4 pb-8 font-quanta">New Posters</h1>
+      <p className="text-gray-600 font-inter mb-5">
+        Choose a ready-made template or create your own poster
+      </p>
+      <div className="flex justify-between my-2 mb-12 items-center">
+        <div className="flex space-x-4 items-center ">
+          {categories.map((category) => (
+            <button
+              key={category}
+              className={`text-${
+                selectedCategory === category ? "white" : "gray-600"
+              } ${
+                selectedCategory === category
+                  ? "bg-gradient-new"
+                  : "border border-blue-200"
+              } py-1 px-4 rounded-lg`}
+              onClick={() => handleCategoryClick(category)}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+        <button className="button-text-color font-quanta text-xl py-2 border border-blue-200 px-4 rounded-2xl">
+          Explore More
+        </button>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:md-grid-cols-4  xl:grid-cols-5 gap-4 mx-10">
+        <PosterDetails category={selectedCategory} />
+        <button className=" rounded-2xl  mx-2 border-2 border-dashed border-blue-200 mt-3">
+          <div className="flex justify-center items-center h-full w-full overflow-hidden">
+            <div className="flex flex-col justify-center items-center gap-2">
+              <img
+                src="/public/assets/icons/guide.png"
+                alt="Poster Image"
+                className="w-12 h-12 rounded-t-2xl object-fill"
+              />
+              <span className={`text-gray-600 font-inter text-sm`}>
+                Create Your Design
+              </span>
+            </div>
+          </div>
+        </button>
       </div>
     </div>
   );

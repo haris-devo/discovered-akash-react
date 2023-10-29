@@ -14,7 +14,7 @@ const Routers = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path="/configurator" element={<Configurator />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
