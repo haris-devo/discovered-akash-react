@@ -1,88 +1,16 @@
-import Accordion from "@mui/material/Accordion";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import {
-  accordionDataCustomize,
-  accordionDataDesign,
-  accordionDataMoment,
-  buttons,
-} from "../constants/ConfiguratorConstant";
+import { buttons } from "../constants/ConfiguratorConstant";
 import { useState } from "react";
+import AccordionDataDesign from "./accordion-data/AccordionDataDesign";
+import AccordionDataMoment from "./accordion-data/AccordionDataMoment";
+import AccordionDataCustomize from "./accordion-data/AccordionDataCustomize";
 
 const DesigningConfigurator = () => {
   const [showDiv, setShowDiv] = useState("Design");
-  const [expanded, setExpanded] = useState(false);
-
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
 
   const handleButtonClick = (buttonName) => {
     setShowDiv(buttonName);
   };
 
-  const renderAccordion = (data) => {
-    return (
-      <div className="flex flex-col p-2">
-        {data.map((accord) => {
-          return (
-            <Accordion
-              key={accord.id}
-              expanded={expanded === accord.id}
-              onChange={handleChange(accord.id)}
-              className="border-0 outline-0 shadow-none "
-              sx={{
-                // remove the shadow
-                boxShadow: "none",
-                borderRadius: "0px !important",
-                position: "initial",
-              }}
-            >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon className="text-blue-300 " />}
-                aria-controls="panel1bh-content"
-                id="panel1bh-header"
-                className="h-12 rounded "
-                sx={{
-                  position: "initial",
-                  // remove the shadow
-                  boxShadow: "none",
-                }}
-              >
-                <Typography
-                  sx={{
-                    width: accord.icon ? "14%" : "5%",
-                    flexShrink: 0,
-                  }}
-                  className="text-blue-300"
-                >
-                  {accord.icon ? (
-                    <img src={accord.icon} alt="..." className="h-5 w-5 " />
-                  ) : null}
-                </Typography>
-                <Typography
-                  sx={{
-                    color: "text.secondary",
-                    fontWeight: 700,
-                    fontSize: "14px",
-                  }}
-                >
-                  {accord.title}
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails className="border-0 shadow-none">
-                <Typography sx={{ wordWrap: "break-word" }}>
-                  {accord.content}
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
-          );
-        })}
-      </div>
-    );
-  };
   const renderDiv = () => {
     switch (showDiv) {
       case "Moment":
@@ -93,7 +21,7 @@ const DesigningConfigurator = () => {
                 Select your favorite design:{" "}
               </h1>
               <div className="flex flex-col  bg-white shadow-lg rounded-lg h-auto ">
-                {renderAccordion(accordionDataMoment)}
+                <AccordionDataMoment />
               </div>
               <div className="my-4 flex w-full flex-col gap-2 ">
                 <div className="flex justify-between w-full px-2">
@@ -131,7 +59,7 @@ const DesigningConfigurator = () => {
                 Select your favorite design:{" "}
               </h1>
               <div className="flex flex-col  bg-white shadow-lg rounded-lg ">
-                {renderAccordion(accordionDataCustomize)}
+                <AccordionDataCustomize />
               </div>
               <div className="my-4 flex w-full flex-col gap-2">
                 <div className="flex justify-between w-full px-2">
@@ -254,7 +182,7 @@ const DesigningConfigurator = () => {
                 Select your favorite design:{" "}
               </h1>
               <div className="flex flex-col  bg-white shadow-lg rounded-lg ">
-                {renderAccordion(accordionDataDesign)}
+                <AccordionDataDesign />
               </div>
               <div className="my-4 flex w-full flex-col gap-2">
                 <div className="flex justify-between w-full px-2">

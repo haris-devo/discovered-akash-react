@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const PosterCard = ({ imageUrl, title, price, discount, rating }) => {
   return (
     <>
@@ -23,6 +25,14 @@ const PosterCard = ({ imageUrl, title, price, discount, rating }) => {
       </div>
     </>
   );
+};
+
+PosterCard.propTypes = {
+  imageUrl: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
+  discount: PropTypes.string.isRequired,
+  rating: PropTypes.string.isRequired,
 };
 
 export default PosterCard;
