@@ -40,4 +40,17 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+    color: none !important;
+    display: none !important;
+  }
+  .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root {
+    color: none !important;
+    display: none !important;
+  }
+  .css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused
+    .MuiOutlinedInput-notchedOutline {
+    border-color: none !important;
+    border-width: none !important;
+  }
 }
