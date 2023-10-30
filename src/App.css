@@ -30,6 +30,10 @@
   color: rgba(49, 57, 66, 1);
 }
 
+.background-color {
+  background: linear-gradient(180deg, #39bff9 0%, #4388ee 100%);
+}
+
 .button-text-color {
   background: linear-gradient(
     272.89deg,
