@@ -56,7 +56,7 @@ const AccordionDataDesign = () => {
               className="text-blue-300 mr-3"
             >
               <img
-                src="../../../../public/assets/icons/birthday.png"
+                src={window.location.origin+"/assets/icons/birthday.png"}
                 alt="..."
                 className="h-5 w-5  "
               />
@@ -87,8 +87,8 @@ const AccordionDataDesign = () => {
                     }}
                   >
                     <img
-                      src="../../../../public/assets/icons/circle.png"
-                      alt="..."
+                      src={window.location.origin+"/assets/icons/circle.png"
+ }                     alt="..."
                       className="h-8 w-8"
                     />
                     <span className="text-center text-blue-200 font-sm">
@@ -135,8 +135,8 @@ const AccordionDataDesign = () => {
               className="text-blue-300"
             >
               <img
-                src="../../../../public/assets/icons/heart.svg"
-                alt="..."
+                src={window.location.origin+"/assets/icons/heart.svg"
+  }              alt="..."
                 className="h-5 w-5 "
               />
             </Typography>
@@ -165,8 +165,8 @@ const AccordionDataDesign = () => {
                     }}
                   >
                     <img
-                      src="../../../../public/assets/icons/circle.png"
-                      alt="..."
+                      src={window.location.origin+"/assets/icons/circle.png"
+ }                     alt="..."
                       className="h-8 w-8"
                     />
                     <span className="text-center text-blue-200 font-sm">
@@ -213,8 +213,8 @@ const AccordionDataDesign = () => {
               className="text-blue-300"
             >
               <img
-                src="../../../../public/assets/icons/parents.png"
-                alt="..."
+                src={window.location.origin+"/assets/icons/parents.png"
+}                alt="..."
                 className="h-5 w-5 "
               />
             </Typography>
@@ -243,8 +243,8 @@ const AccordionDataDesign = () => {
                     }}
                   >
                     <img
-                      src="../../../../public/assets/icons/circle.png"
-                      alt="..."
+                      src={window.location.origin+"/assets/icons/circle.png"
+ }                     alt="..."
                       className="h-8 w-8"
                     />
                     <span className="text-center text-blue-200 font-sm">
@@ -291,8 +291,8 @@ const AccordionDataDesign = () => {
               className="text-blue-300"
             >
               <img
-                src="../../../../public/assets/icons/wedding.png"
-                alt="..."
+                src={window.location.origin+"/assets/icons/wedding.png"
+}                alt="..."
                 className="h-5 w-5 "
               />
             </Typography>
@@ -321,8 +321,8 @@ const AccordionDataDesign = () => {
                     }}
                   >
                     <img
-                      src="../../../../public/assets/icons/circle.png"
-                      alt="..."
+                      src={window.location.origin+"/assets/icons/circle.png"
+ }                     alt="..."
                       className="h-8 w-8"
                     />
                     <span className="text-center text-blue-200 font-sm">
@@ -369,8 +369,8 @@ const AccordionDataDesign = () => {
               className="text-blue-300"
             >
               <img
-                src="../../../../public/assets/icons/family.png"
-                alt="..."
+                src={window.location.origin+"/assets/icons/family.png"
+ }               alt="..."
                 className="h-5 w-5 "
               />
             </Typography>
@@ -399,8 +399,8 @@ const AccordionDataDesign = () => {
                     }}
                   >
                     <img
-                      src="../../../../public/assets/icons/circle.png"
-                      alt="..."
+                      src={window.location.origin+"/assets/icons/circle.png"
+ }                     alt="..."
                       className="h-8 w-8"
                     />
                     <span className="text-center text-blue-200 font-sm">

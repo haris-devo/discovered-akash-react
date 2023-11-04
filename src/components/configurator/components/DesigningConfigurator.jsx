@@ -40,7 +40,7 @@ const DesigningConfigurator = () => {
                     Next
                     <span className="ml-2">
                       <img
-                        src="../../../../public/assets/icons/arrow.png"
+                        src={window.location.origin+"/assets/icons/arrow.png"}
                         alt="..."
                         className="h-4 w-4"
                       />
@@ -78,7 +78,7 @@ const DesigningConfigurator = () => {
                     Next
                     <span className="ml-2">
                       <img
-                        src="../../../../public/assets/icons/arrow.png"
+                        src={window.location.origin+"/assets/icons/arrow.png"}
                         alt="..."
                         className="h-4 w-4"
                       />
@@ -195,7 +195,7 @@ const DesigningConfigurator = () => {
                     Add to Cart
                     <span className="ml-2">
                       <img
-                        src="../../../../public/assets/icons/cart-white.png"
+                        src={window.location.origin+"/assets/icons/cart-white}.png"}
                         alt="..."
                         className="h-4 w-4"
                       />
@@ -208,7 +208,7 @@ const DesigningConfigurator = () => {
                     Next
                     <span className="ml-2">
                       <img
-                        src="../../../../public/assets/icons/arrow.png"
+                        src={window.location.origin+"/assets/icons/arrow.png"}
                         alt="..."
                         className="h-4 w-4"
                       />
@@ -240,7 +240,7 @@ const DesigningConfigurator = () => {
     <div className="w-full md:w-1/3 rounded-xl bg-gray-50 h-[30rem] py-3 mt-6 md:mt-0">
       <div className="flex justify-between m-4">
         <img
-          src="../../../../public/assets/icons/guide.png"
+          src={window.location.origin+"/assets/icons/guide.png"}
           alt="..."
           className="h-10 w-10 rounded-full"
         />

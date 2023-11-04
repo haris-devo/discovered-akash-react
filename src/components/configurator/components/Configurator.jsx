@@ -1,7 +1,9 @@
-import { useReducer, useCallback, useEffect } from "react";
+import React,{ useReducer, useCallback, useEffect } from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { images } from "../../../constants/RandomURL";
 import DesigningConfigurator from "./DesigningConfigurator";
+import SVGEdit from "../../svg/SVGEdit";
+export const ConfiguratorContext = React.createContext();
 
 const initialState = {
   designFor: "",
@@ -9,6 +11,41 @@ const initialState = {
   date: "",
   selectedImage: images[0].url,
   showDiv: true,
+  uploadedImages:[],
+  heading:'',
+  subHeading:'',
+  moments:[],
+  starmap:{
+    checked:null,
+    colorType:null,
+    colorValue:null
+  },
+  texts:[],
+  selectedMoment:-1,
+  shapes:[],
+  streetmap: [      
+    {
+      featureType: "all",
+      elementType: "labels",
+      stylers: [{ visibility: "on" }],
+    },
+    {
+      featureType: "landscape",
+      elementType: "geometry.fill",
+      stylers: [{ color: "#FFFFFF",visibility:"on" }],
+    },
+    {
+      featureType: "road",
+      elementType: "geometry.fill",
+      stylers: [{ color: "#21618C",visibility:"on" }],
+    },
+
+    {
+      featureType: "water",
+      elementType: "geometry.fill",
+      stylers: [{ color: "#CBEFEF",visibility:"on" }],
+    },
+  ],
 };
 
 const reducer = (state, action) => {
@@ -23,6 +60,26 @@ const reducer = (state, action) => {
       return { ...state, selectedImage: action.payload };
     case "SET_SHOW_DIV":
       return { ...state, showDiv: action.payload };
+    case 'STAR_MAP':
+      return {...state,starmap:{[action.type2]:action.payload}}
+    case 'STAR_MAP_COLORS':
+      return {...state,starmap:{colorType:action.payload.ctype,colorValue:action.payload.cvalue}}
+    case 'UPDATE_MOMENTS_ARRAY':
+      return {...state,moments:[...state.moments,action.payload]}
+    case 'UPDATE_MOMENTS_VALUE':
+      return {...state,moments:action.payload}
+    case 'UPDATE_IMAGES':
+      return {...state,uploadedImages:[...state.uploadedImages,action.payload]}
+    case 'UPDATE_TEXTS':
+      return {...state,texts:[...state.texts,action.payload]}
+    case 'UPDATE_TEXTS_VALUE':
+      return {...state,texts:action.payload}
+    case 'SELECTED_MOMENT':
+      return {...state,selectedMoment:action.payload}
+      case 'UPDATE_SHAPES':
+        return {...state,shapes:[...state.shapes,action.payload]}
+    case 'UPDATE_STREETMAP':
+        return {...state,streetmap:action.payload}     
     default:
       return state;
   }
@@ -30,7 +87,9 @@ const reducer = (state, action) => {
 
 const Configurator = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
+  useEffect(()=>{
+    console.log(state)
+  },[state])
   const handleDesignForChange = useCallback((event) => {
     dispatch({ type: "SET_DESIGN_FOR", payload: event.target.value });
   }, []);
@@ -52,9 +111,9 @@ const Configurator = () => {
   }, [state.selectedImage]);
 
   const { designFor, location, date, selectedImage, showDiv } = state;
-
+  
   return (
-    <>
+    <ConfiguratorContext.Provider value={{state,updateState:dispatch}}>
       <div className="container mx-auto px-4 md:px-28 max-h-auto h-[140vh] py-10 font-inter">
         <h1 className="text-4xl font-bold">Name Template</h1>
         <div className="flex flex-col md:flex-row space-x-6 my-10 h-5/6">
@@ -80,11 +139,7 @@ const Configurator = () => {
               </div>
               <div className="w-full md:w-full h-[30rem] max-h-auto">
                 <div className="bg-black h-full w-full rounded-2xl">
-                  <img
-                    src={selectedImage}
-                    alt="..."
-                    className="h-full w-full rounded-2xl"
-                  />
+                  <SVGEdit/>
                 </div>
               </div>
             </div>
@@ -187,7 +242,7 @@ const Configurator = () => {
           )}
         </div>
       </div>
-    </>
+    </ConfiguratorContext.Provider>
   );
 };
 

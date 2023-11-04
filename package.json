@@ -14,9 +14,14 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.14",
     "@mui/material": "^5.14.14",
+    "dom-to-image": "^2.6.0",
+    "dom-to-image-more": "^3.2.0",
+    "html-to-image": "^1.11.11",
+    "html2canvas": "^1.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
+    "react-image-file-resizer": "^0.4.8",
     "react-router-dom": "^6.17.0"
   },
   "devDependencies": {

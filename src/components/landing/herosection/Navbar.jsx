@@ -56,7 +56,7 @@ export default function Navbar() {
                     to={to}
                   >
                     <img
-                      src={`../../../../public/assets/icons/${icon}`}
+                      src={window.location.origin+`/assets/icons/${icon}`}
                       alt={`${label} Icon`}
                       className="w-3 h-4 "
                     />

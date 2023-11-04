@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>D3-Celestial Starmap</title>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3.geo.projection.min.js"></script>
+  <script type="text/javascript" src="../celestial.min.js"></script>
+  <link rel="stylesheet" href="../celestial.css">
+</head>
+<body>
+  <div style="overflow:hidden;"><div id="celestial-map"></div></div>
+  <div id="celestial-form"></div>
+  
+  <script type="text/javascript">
+
+Celestial.display({
+  disableAnimations: false,
+  form: true,
+  formFields: {download: true},
+  datapath: "../data/",
+  stars: {propername: true}
+});
+
+  </script>
+
+  <footer id="d3-celestial-footer">
+    <p><a href="https://github.com/ofrohn/d3-celestial"><b>D3-Celestial</b></a> released under <a href="http://opensource.org/licenses/BSD-3-Clause">BSD license</a>. Copyright 2015-19 <a href="http://armchairastronautics.blogspot.com/" rel="author">Olaf Frohn</a>.</p>
+  </footer>
+  <script>
+    // alert("hello")
+    // window.onload = function() {
+    // }
+     window.addEventListener('message', (event) => {
+      // alert("hello")
+      var index=-1;
+      if (event.data.type === 'checked') {
+        if(event.data.id=='planets-names')
+        document.getElementById('planets-show').click()
+        
+        document.getElementById([event.data.id]).click()
+      }
+      else if(event.data.type==='colors'){
+    
+        const inputElement=document.getElementById([event.data.id])
+        document.getElementById([event.data.id]).value=event.data.value
+        const event2 = new Event('input');
+        inputElement.dispatchEvent(event2);
+      }
+      else if(event.data.type==='moment'){
+        console.log(event.data)
+        document.getElementById([event.data.value]).click()
+        index=event.data.index
+        // document.getElementById([event.data.value2]).click()
+      }
+      var t = d3.select("body").append("a").node(),
+            e = document.querySelector("canvas");
+      
+            window.localStorage.setItem('map',e
+            .toDataURL("image/png")
+            .replace("image/png", "image/octet-stream"))
+            window.parent.postMessage('star-map', '*');
+    
+      // console.log('Message from Parent:', event.data);
+    });
+
+  </script>
+</body>
+</html>

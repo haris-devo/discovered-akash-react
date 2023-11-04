@@ -21,7 +21,7 @@ const HeroSection = () => {
               >
                 <span>
                   <img
-                    src="../../../../public/assets/icons/Vector-1.png"
+                    src={window.location.origin+"/assets/icons/Vector-1.png"}
                     alt="Banner Image"
                     className="w-4 h-4"
                   />
@@ -40,7 +40,7 @@ const HeroSection = () => {
           <div className="flex items-center justify-center lg:mt-0 h-full w-full lg:w-1/2">
             <img
               //   link with unsplash
-              src="../../../../public/assets/heroReview.png"
+              src={window.location.origin+"/assets/heroReview.png"}
               alt=""
               className="w-full lg:w-[420px] mt-auto"
             />
