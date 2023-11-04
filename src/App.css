@@ -37,16 +37,49 @@
   height: auto;
 }
 
-.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
-  color: none !important;
-  display: none !important;
+@font-face {
+  font-family: Quanta;
+  src: url("/public/QuantaGroteskPro-Bold.ttf");
 }
-.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root {
-  color: none !important;
-  display: none !important;
+.font-quanta {
+  font-family: Quanta, sans-serif;
 }
-.css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused
-  .MuiOutlinedInput-notchedOutline {
-  border-color: none !important;
-  border-width: none !important;
+.akash-heading {
+  font-family: Quanta, sans-serif;
+  font-size: 96px;
+  color: rgba(49, 57, 66, 1);
+}
+.akash-hero-sub {
+  font-family: Quanta, sans-serif;
+  font-size: 32px;
+  color: rgba(49, 57, 66, 1);
+}
+
+.background-color {
+  background: linear-gradient(180deg, #39bff9 0%, #4388ee 100%);
+}
+
+.button-text-color {
+  background: linear-gradient(
+    272.89deg,
+    #2360fc 0%,
+    #49bcfc 50.52%,
+    #1ed6e2 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+    color: none !important;
+    display: none !important;
+  }
+  .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root {
+    color: none !important;
+    display: none !important;
+  }
+  .css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused
+    .MuiOutlinedInput-notchedOutline {
+    border-color: none !important;
+    border-width: none !important;
+  }
 }

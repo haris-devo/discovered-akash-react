@@ -1,21 +1,27 @@
 import { CloseOutlined, Menu } from "@mui/icons-material";
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import DrawerModal from "../../../ui/DrawerModal";
+import SignIn from "../../authentication/SignIn";
 
 const links = [
   { to: "/", icon: "home.png", label: "Home" },
   { to: "/product", icon: "product.png", label: "Product" },
   { to: "/configurator", icon: "config.png", label: "Configurator" },
   { to: "/cart", icon: "cart.png", label: "Cart" },
-  { to: "/login", icon: "signin.png", label: "Sign In/Up" },
 ];
 
 export default function Navbar() {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
+  const [openDrawer, setOpenDrawer] = React.useState(false);
   const location = useLocation();
 
   const handleToggleNavbar = () => {
     setNavbarOpen((prev) => !prev);
+  };
+
+  const handleSignInClick = () => {
+    setOpenDrawer(true);
   };
 
   return (
@@ -72,6 +78,27 @@ export default function Navbar() {
                   </Link>
                 </li>
               ))}
+
+              <li className={`nav-item mx-6  ${"text-blue-100"}`}>
+                <DrawerModal
+                  buttonInfo={
+                    <button
+                      className=" py-1 flex items-center md:flex-col gap-1 justify-center text-xs uppercase  leading-snug text-black hover:opacity-75"
+                      onClick={handleSignInClick}
+                    >
+                      <img
+                        src={`../../../../public/assets/icons/signin.png`}
+                        alt={` Icon`}
+                        className="w-3 h-4 "
+                      />
+                      <span className="font-inter">Sign In</span>
+                    </button>
+                  }
+                  openDrawer={openDrawer}
+                >
+                  <SignIn />
+                </DrawerModal>
+              </li>
             </ul>
           </div>
         </div>
