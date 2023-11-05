@@ -1,6 +1,4 @@
 import React, { memo, useContext, useEffect, useRef, useState } from "react";
-// import poster from './Poster 3.svg'
-import Resizer from "react-image-file-resizer";
 import StreetMap from "./StreetMap";
 import { ConfiguratorContext } from "../configurator/components/Configurator";
 import AutocompleteInput from "./Autocomplete";

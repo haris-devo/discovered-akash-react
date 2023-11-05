@@ -3,48 +3,56 @@ import React, { useRef, useEffect, memo } from "react";
 import GoogleMapReact from "google-map-react";
 import html2canvas from "html2canvas";
 import domtoimage from "dom-to-image-more";
-import * as htmlToImage from 'html-to-image';
-function StreetMap({setImage,svg,state}) {
+import * as htmlToImage from "html-to-image";
+function StreetMap({ setImage, svg, state }) {
   const mapRef = useRef(null);
   const handleCapture = async () => {
     try {
-      if(mapRef.current){
+      if (mapRef.current) {
         // console.log(mapRef.current.chilren[0])
-        domtoimage.toSvg(mapRef.current,{quality:1,style:{backgroundColor:"black"}}).then(res=>{
-            console.log(res.indexOf('border-style: solid'))
-          const res2=res.replace(/border-style: solid/g,"border-style: none!important")    
-          setImage(res2)
-          // download(mapRef.current,"new")
-          // handleCapture2()
-        })
-      // const dataUrl = await domtoimage.toPng(mapRef.current);
+        domtoimage
+          .toSvg(mapRef.current, {
+            quality: 1,
+            style: { backgroundColor: "black" },
+          })
+          .then((res) => {
+            console.log(res.indexOf("border-style: solid"));
+            const res2 = res.replace(
+              /border-style: solid/g,
+              "border-style: none!important"
+            );
+            setImage(res2);
+            // download(mapRef.current,"new")
+            // handleCapture2()
+          });
+        // const dataUrl = await domtoimage.toPng(mapRef.current);
 
-      // setImage(dataUrl)
-      // window.localStorage.setItem('street-map', dataUrl)
-     console.log("streepmap")
-    }
+        // setImage(dataUrl)
+        // window.localStorage.setItem('street-map', dataUrl)
+        console.log("streepmap");
+      }
     } catch (error) {
-      console.log(mapRef.current)
+      console.log(mapRef.current);
       console.log("Couldn't generate image:", error);
     }
   };
-  function download(text, filename){
-    var blob = new Blob([text], {type: "image/png"});
-    
+  function download(text, filename) {
+    var blob = new Blob([text], { type: "image/png" });
+
     var url = window.URL.createObjectURL(blob);
-    console.log(text,blob,url)
+    console.log(text, blob, url);
     var a = document.createElement("a");
     a.href = url;
     a.download = filename;
     a.click();
   }
 
-//  useEffect(()=>{
-//     handleCapture()
-//     if(svg){
-//       setTimeout(()=>handleCapture(),5000)
-//     }
-//  },[svg,state])
+  //  useEffect(()=>{
+  //     handleCapture()
+  //     if(svg){
+  //       setTimeout(()=>handleCapture(),5000)
+  //     }
+  //  },[svg,state])
   return (
     <>
       {/* <div ref={mapRef} style={{ width: '100%', height: '400px' }}></div> */}
@@ -56,7 +64,7 @@ function StreetMap({setImage,svg,state}) {
           onTilesLoaded={handleCapture}
           // onGoogleApiLoaded={handleCapture}
           options={{
-            styles: state.streetmap
+            styles: state.streetmap,
             // Replace with your style JSON
           }}
         />

@@ -16,37 +16,37 @@ const DesigningConfigurator = () => {
       case "Moment":
         return (
           <div className="h-full design-div">
-            <div className="flex flex-col space-x-3 h-full justify-between">
+            <div className="flex flex-col md:space-x-3 h-full gap-5">
               <h1 className="font-semibold my-6 mb-3  ">
                 Select your favorite design:{" "}
               </h1>
               <div className="flex flex-col  bg-white shadow-lg rounded-lg h-auto ">
                 <AccordionDataMoment />
               </div>
-              <div className="my-4 flex w-full flex-col gap-2 ">
-                <div className="flex justify-between w-full px-2">
-                  <span>To Pay:</span>
-                  <span>2000</span>
-                </div>
-                <div className="flex justify-between">
-                  {/* add to cart button  */}
-                  <button className=" text-white px-10 py-3 rounded-2xl bg-gradient-new">
-                    Add to Cart
-                  </button>
-                  <button
-                    className="text-black border-2 px-6 py-4 rounded-2xl flex items-center space-x-2"
-                    onClick={() => setShowDiv("Customize")}
-                  >
-                    Next
-                    <span className="ml-2">
-                      <img
-                        src={window.location.origin+"/assets/icons/arrow.png"}
-                        alt="..."
-                        className="h-4 w-4"
-                      />
-                    </span>
-                  </button>
-                </div>
+            </div>
+            <div className="my-4 flex w-full flex-col gap-2 ">
+              <div className="flex justify-between w-full px-2">
+                <span>To Pay:</span>
+                <span>2000</span>
+              </div>
+              <div className="flex justify-between ">
+                {/* add to cart button  */}
+                <button className=" text-white px-10 py-3 rounded-2xl bg-gradient-new">
+                  Add to Cart
+                </button>
+                <button
+                  className="text-black border-2 px-6 py-4 rounded-2xl flex items-center space-x-2"
+                  onClick={() => setShowDiv("Customize")}
+                >
+                  Next
+                  <span className="ml-2">
+                    <img
+                      src={window.location.origin + "/assets/icons/arrow.png"}
+                      alt="..."
+                      className="h-4 w-4"
+                    />
+                  </span>
+                </button>
               </div>
             </div>
           </div>
@@ -78,7 +78,7 @@ const DesigningConfigurator = () => {
                     Next
                     <span className="ml-2">
                       <img
-                        src={window.location.origin+"/assets/icons/arrow.png"}
+                        src={window.location.origin + "/assets/icons/arrow.png"}
                         alt="..."
                         className="h-4 w-4"
                       />
@@ -195,7 +195,10 @@ const DesigningConfigurator = () => {
                     Add to Cart
                     <span className="ml-2">
                       <img
-                        src={window.location.origin+"/assets/icons/cart-white}.png"}
+                        src={
+                          window.location.origin +
+                          "/assets/icons/cart-white}.png"
+                        }
                         alt="..."
                         className="h-4 w-4"
                       />
@@ -208,7 +211,7 @@ const DesigningConfigurator = () => {
                     Next
                     <span className="ml-2">
                       <img
-                        src={window.location.origin+"/assets/icons/arrow.png"}
+                        src={window.location.origin + "/assets/icons/arrow.png"}
                         alt="..."
                         className="h-4 w-4"
                       />
@@ -240,7 +243,7 @@ const DesigningConfigurator = () => {
     <div className="w-full md:w-1/3 rounded-xl bg-gray-50 h-[30rem] py-3 mt-6 md:mt-0">
       <div className="flex justify-between m-4">
         <img
-          src={window.location.origin+"/assets/icons/guide.png"}
+          src={window.location.origin + "/assets/icons/guide.png"}
           alt="..."
           className="h-10 w-10 rounded-full"
         />

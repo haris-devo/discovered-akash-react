@@ -49,7 +49,7 @@ const AccordionDataDesign = () => {
           >
             <Typography
               sx={{
-                width: "5%",
+                width: "10%",
                 flexShrink: 0,
                 marginRight: "10px",
               }}
@@ -128,7 +128,7 @@ const AccordionDataDesign = () => {
           >
             <Typography
               sx={{
-                width: "5%",
+                width: "10%",
                 flexShrink: 0,
                 marginRight: "10px",
               }}
@@ -206,7 +206,7 @@ const AccordionDataDesign = () => {
           >
             <Typography
               sx={{
-                width: "5%",
+                width: "10%",
                 flexShrink: 0,
                 marginRight: "10px",
               }}
@@ -284,7 +284,7 @@ const AccordionDataDesign = () => {
           >
             <Typography
               sx={{
-                width: "5%",
+                width: "10%",
                 flexShrink: 0,
                 marginRight: "10px",
               }}
@@ -362,7 +362,7 @@ const AccordionDataDesign = () => {
           >
             <Typography
               sx={{
-                width: "5%",
+                width: "10%",
                 flexShrink: 0,
                 marginRight: "10px",
               }}

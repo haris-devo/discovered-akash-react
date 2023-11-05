@@ -1,4 +1,4 @@
-import React,{ useReducer, useCallback, useEffect } from "react";
+import React, { useReducer, useCallback, useEffect } from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { images } from "../../../constants/RandomURL";
 import DesigningConfigurator from "./DesigningConfigurator";
@@ -11,19 +11,19 @@ const initialState = {
   date: "",
   selectedImage: images[0].url,
   showDiv: true,
-  uploadedImages:[],
-  heading:'',
-  subHeading:'',
-  moments:[],
-  starmap:{
-    checked:null,
-    colorType:null,
-    colorValue:null
+  uploadedImages: [],
+  heading: "",
+  subHeading: "",
+  moments: [],
+  starmap: {
+    checked: null,
+    colorType: null,
+    colorValue: null,
   },
-  texts:[],
-  selectedMoment:-1,
-  shapes:[],
-  streetmap: [      
+  texts: [],
+  selectedMoment: -1,
+  shapes: [],
+  streetmap: [
     {
       featureType: "all",
       elementType: "labels",
@@ -32,18 +32,18 @@ const initialState = {
     {
       featureType: "landscape",
       elementType: "geometry.fill",
-      stylers: [{ color: "#FFFFFF",visibility:"on" }],
+      stylers: [{ color: "#FFFFFF", visibility: "on" }],
     },
     {
       featureType: "road",
       elementType: "geometry.fill",
-      stylers: [{ color: "#21618C",visibility:"on" }],
+      stylers: [{ color: "#21618C", visibility: "on" }],
     },
 
     {
       featureType: "water",
       elementType: "geometry.fill",
-      stylers: [{ color: "#CBEFEF",visibility:"on" }],
+      stylers: [{ color: "#CBEFEF", visibility: "on" }],
     },
   ],
 };
@@ -60,26 +60,35 @@ const reducer = (state, action) => {
       return { ...state, selectedImage: action.payload };
     case "SET_SHOW_DIV":
       return { ...state, showDiv: action.payload };
-    case 'STAR_MAP':
-      return {...state,starmap:{[action.type2]:action.payload}}
-    case 'STAR_MAP_COLORS':
-      return {...state,starmap:{colorType:action.payload.ctype,colorValue:action.payload.cvalue}}
-    case 'UPDATE_MOMENTS_ARRAY':
-      return {...state,moments:[...state.moments,action.payload]}
-    case 'UPDATE_MOMENTS_VALUE':
-      return {...state,moments:action.payload}
-    case 'UPDATE_IMAGES':
-      return {...state,uploadedImages:[...state.uploadedImages,action.payload]}
-    case 'UPDATE_TEXTS':
-      return {...state,texts:[...state.texts,action.payload]}
-    case 'UPDATE_TEXTS_VALUE':
-      return {...state,texts:action.payload}
-    case 'SELECTED_MOMENT':
-      return {...state,selectedMoment:action.payload}
-      case 'UPDATE_SHAPES':
-        return {...state,shapes:[...state.shapes,action.payload]}
-    case 'UPDATE_STREETMAP':
-        return {...state,streetmap:action.payload}     
+    case "STAR_MAP":
+      return { ...state, starmap: { [action.type2]: action.payload } };
+    case "STAR_MAP_COLORS":
+      return {
+        ...state,
+        starmap: {
+          colorType: action.payload.ctype,
+          colorValue: action.payload.cvalue,
+        },
+      };
+    case "UPDATE_MOMENTS_ARRAY":
+      return { ...state, moments: [...state.moments, action.payload] };
+    case "UPDATE_MOMENTS_VALUE":
+      return { ...state, moments: action.payload };
+    case "UPDATE_IMAGES":
+      return {
+        ...state,
+        uploadedImages: [...state.uploadedImages, action.payload],
+      };
+    case "UPDATE_TEXTS":
+      return { ...state, texts: [...state.texts, action.payload] };
+    case "UPDATE_TEXTS_VALUE":
+      return { ...state, texts: action.payload };
+    case "SELECTED_MOMENT":
+      return { ...state, selectedMoment: action.payload };
+    case "UPDATE_SHAPES":
+      return { ...state, shapes: [...state.shapes, action.payload] };
+    case "UPDATE_STREETMAP":
+      return { ...state, streetmap: action.payload };
     default:
       return state;
   }
@@ -87,9 +96,9 @@ const reducer = (state, action) => {
 
 const Configurator = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  useEffect(()=>{
-    console.log(state)
-  },[state])
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
   const handleDesignForChange = useCallback((event) => {
     dispatch({ type: "SET_DESIGN_FOR", payload: event.target.value });
   }, []);
@@ -111,16 +120,20 @@ const Configurator = () => {
   }, [state.selectedImage]);
 
   const { designFor, location, date, selectedImage, showDiv } = state;
-  
+
   return (
-    <ConfiguratorContext.Provider value={{state,updateState:dispatch}}>
-      <div className="container mx-auto px-4 md:px-28 max-h-auto h-[140vh] py-10 font-inter">
+    <ConfiguratorContext.Provider value={{ state, updateState: dispatch }}>
+      <div className="container mx-auto px-4 md:px-28 max-h-auto h-auto md:py-14 py-2 font-inter">
         <h1 className="text-4xl font-bold">Name Template</h1>
-        <div className="flex flex-col md:flex-row space-x-6 my-10 h-5/6">
-          <div className={`w-full md:w-2/3   ${showDiv ? "mt-2" : "mt-20"}`}>
+        <div className="flex flex-col md:flex-row md:space-x-6 my-10 h-5/6 md:justify-center">
+          <div
+            className={`w-full md:w-2/4   ${
+              showDiv ? "mt-2" : "mt-2 md:mt-20"
+            }`}
+          >
             {/* image template  */}
-            <div className="flex flex-col md:flex-row space-x-3">
-              <div className="flex flex-col gap-2 py-4">
+            <div className="flex flex-col-reverse md:flex-row md:space-x-3">
+              <div className="flex md:flex-col overflow-x-scroll md:overflow-x-hidden gap-2 py-4 md:w-1/5 items-center">
                 {images.map((image) => (
                   <div
                     className={` h-20 w-20 rounded-2xl cursor-pointer hover:shadow-2xl hover:-translate-y-1 transition-all border-2 border-blue-200 ${
@@ -137,9 +150,13 @@ const Configurator = () => {
                   </div>
                 ))}
               </div>
-              <div className="w-full md:w-full h-[30rem] max-h-auto">
-                <div className="bg-black h-full w-full rounded-2xl">
-                  <SVGEdit/>
+              <div className="w-full md:w-4/5 h-[30rem] max-h-auto">
+                <div className="bg-white h-full w-full rounded-2xl svg-div">
+                  <SVGEdit
+                    selectedImage={selectedImage}
+                    showDiv={showDiv}
+                    dispatch={dispatch}
+                  />
                 </div>
               </div>
             </div>
@@ -149,10 +166,10 @@ const Configurator = () => {
               <div className="flex flex-col h-full gap-3">
                 <div className=" h-1/4">
                   <div className="flex flex-col text-center justify-center h-full items-center gap-2">
-                    <h1 className="text-white text-xl font-bold">
+                    <h1 className="text-white md:text-xl font-bold pt-2">
                       Welcome To Our Configurator
                     </h1>
-                    <p className="text-white text-sm px-10">
+                    <p className="text-white text-xs md:text-sm md:px-10 px-4">
                       Let’s start customizing the poster by answering these
                       questions
                     </p>
@@ -161,10 +178,13 @@ const Configurator = () => {
                 <div className=" h-2/4">
                   <div className="flex flex-col">
                     {/* Give me 3 input fields  */}
-                    <form action="" className="flex flex-col px-10 gap-3">
+                    <form
+                      action=""
+                      className="flex flex-col md:px-10 px-4 gap-4 my-4"
+                    >
                       <FormControl
                         // set the design
-                        className="bg-white border-b border-white  focus:outline-none p-3 rounded-2xl"
+                        className="bg-white border-b border-white  focus:outline-none p-3 rounded-2xl "
                       >
                         <InputLabel className="text-white">
                           Who Are You Designing For
@@ -222,7 +242,7 @@ const Configurator = () => {
                 </div>
                 <div className=" h-1/4 mb-6">
                   <div className="flex flex-col justify-between items-center h-full ">
-                    <button className="bg-[#6A93A5] text-white px-10 py-3 rounded-2xl">
+                    <button className="bg-[#6A93A5] text-white px-10 py-3 rounded-2xl my-3">
                       Start Designing
                     </button>
                     <button
