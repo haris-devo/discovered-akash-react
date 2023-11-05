@@ -58,3 +58,9 @@
     border-width: none !important;
   }
 }
+
+/* Add style for inbuilt input field when selected */
+input:focus {
+  outline: none;
+  border: none;
+}
