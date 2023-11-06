@@ -8,7 +8,6 @@ import { items } from "../../constants/ConfiguratorConstant";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import React from "react";
 
-
 const AccordionDataDesign = () => {
   const [expanded, setExpanded] = React.useState(false);
   const [birthdayItems, setBirthdayItems] = React.useState(items);

@@ -99,6 +99,21 @@ export default function Navbar() {
                   <SignIn />
                 </DrawerModal>
               </li>
+              <li className={`nav-item mx-6 ${"text-blue-100"}`}>
+                <Link
+                  className=" py-1 flex items-center md:flex-col gap-1 justify-center text-xs uppercase  leading-snug text-black hover:opacity-75"
+                  to="/profile"
+                >
+                  <img
+                    src={`../../../../public/assets/icons/signin.png`}
+                    alt={`Icon`}
+                    className="w-3 h-4 "
+                  />
+                  <span className={`font-inter ${"font-normal text-blue-300"}`}>
+                    Profile
+                  </span>
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

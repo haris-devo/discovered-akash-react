@@ -90,3 +90,8 @@
   width: 100%;
   height: 100%;
 }
+/* Add style for inbuilt input field when selected */
+input:focus {
+  outline: none;
+  border: none;
+}
