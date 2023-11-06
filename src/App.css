@@ -93,5 +93,5 @@
 /* Add style for inbuilt input field when selected */
 input:focus {
   outline: none;
-  border: none;
+  border: 1px solid lightgray;
 }
