@@ -56,7 +56,7 @@ function StreetMap({ setImage, svg, state }) {
   return (
     <>
       {/* <div ref={mapRef} style={{ width: '100%', height: '400px' }}></div> */}
-      <div style={{ height: "100vh", width: "100vw" }} ref={mapRef}>
+      <div style={{ height: "2000px", width: "2000px" }} ref={mapRef}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyDE7uJo2ZLlWKXBoMgkv8K9JAqnlgjCyyE" }}
           defaultCenter={{ lat: 59.95, lng: 30.33 }}

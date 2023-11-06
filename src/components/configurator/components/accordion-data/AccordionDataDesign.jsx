@@ -9,7 +9,13 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import React from "react";
 
 const AccordionDataDesign = () => {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState({
+    panel1: false,
+    panel2: false,
+    panel3: false,
+    panel4: false,
+    panel5: false,
+  });
   const [birthdayItems, setBirthdayItems] = React.useState(items);
   const [lovedOneItems, setLovedOneItems] = React.useState(items);
   const [parentItems, setParentItems] = React.useState(items);
@@ -17,7 +23,8 @@ const AccordionDataDesign = () => {
   const [familyItems, setFamilyItems] = React.useState(items);
 
   const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
+    setExpanded({...expanded,
+     [panel]: isExpanded ? true : false});
   };
 
   return (
@@ -25,7 +32,7 @@ const AccordionDataDesign = () => {
       <div className="flex flex-col p-2">
         <Accordion
           id="panel1"
-          expanded={expanded === "panel1"}
+          expanded={expanded["panel1"]}
           onChange={handleChange("panel1")}
           className="border-0 outline-0 shadow-none "
           sx={{
@@ -104,7 +111,7 @@ const AccordionDataDesign = () => {
       <div className="flex flex-col p-2">
         <Accordion
           id="panel2"
-          expanded={expanded === "panel2"}
+          expanded={expanded["panel2"]}
           onChange={handleChange("panel2")}
           className="border-0 outline-0 shadow-none "
           sx={{
@@ -182,7 +189,7 @@ const AccordionDataDesign = () => {
       <div className="flex flex-col p-2">
         <Accordion
           id="panel3"
-          expanded={expanded === "panel3"}
+          expanded={expanded["panel3"]}
           onChange={handleChange("panel3")}
           className="border-0 outline-0 shadow-none "
           sx={{
@@ -260,7 +267,7 @@ const AccordionDataDesign = () => {
       <div className="flex flex-col p-2">
         <Accordion
           id="panel4"
-          expanded={expanded === "panel4"}
+          expanded={expanded["panel4"]}
           onChange={handleChange("panel4")}
           className="border-0 outline-0 shadow-none "
           sx={{
@@ -338,7 +345,7 @@ const AccordionDataDesign = () => {
       <div className="flex flex-col p-2">
         <Accordion
           id="panel5"
-          expanded={expanded === "panel5"}
+          expanded={expanded["panel5"]}
           onChange={handleChange("panel5")}
           className="border-0 outline-0 shadow-none "
           sx={{

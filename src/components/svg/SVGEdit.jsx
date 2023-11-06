@@ -17,7 +17,7 @@ const SVGEdit = () => {
   const svgref = useRef();
   const { state, updateState } = useContext(ConfiguratorContext);
   const [isDragging, setDragging] = useState(false);
-  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [dragStart, setDragStart] = useState(null);
   const [starMapLoaded,setStarMapLoaded]=useState(false)
   const [streetMapLoaded,setStreetMapLoaded]=useState(false)
   
@@ -34,7 +34,7 @@ const SVGEdit = () => {
     e.preventDefault();
 
     // Set the resize factor (adjust as needed)
-    const resizeFactor = 1;
+    const resizeFactor = 10;
     // Calculate new dimension
     const newWidth =
       selected.width + (e.deltaY < 0 ? resizeFactor : -resizeFactor);
@@ -62,27 +62,27 @@ const SVGEdit = () => {
   useEffect(() => {
     const onMouseMove = (e) => {
       if (!isDragging || !selected.ref) return;
-
+      console.log(dragStart,e.clientX,e.clientY)
       const dx = e.clientX - dragStart.x;
       const dy = e.clientY - dragStart.y;
       const conX = dx < 0 ? -1 : 1;
       const conY = dy < 0 ? -1 : 1;
 
-      const newX = selected.x + dx + 4 * conX;
-      const newY = selected.y + dy + 4 * conY;
+      const newX = selected.x + dx  ;
+      const newY = selected.y + dy ;
 
       selected.ref.target.setAttribute("x", newX);
       selected.ref.target.setAttribute("y", newY);
 
-      setDragStart({ x: e.clientX, y: e.clientY });
+      // setDragStart({ x: e.clientX, y: e.clientY });
       setSelected({ ...selected, x: newX, y: newY });
     };
 
     const onMouseUp = () => {
+      setDragStart(null)
       setDragging(false);
     };
     if (selected.ref) {
-      selected.ref.target.addEventListener("wheel", onWheel);
       selected.ref.target.addEventListener("mousemove", onMouseMove);
     }
     document.addEventListener("mouseup", onMouseUp);
@@ -90,11 +90,19 @@ const SVGEdit = () => {
       if (selected.ref) {
         selected.ref.target.removeEventListener("mousemove", onMouseMove);
 
-        selected.ref.target.removeEventListener("wheel", onWheel);
       }
       document.removeEventListener("mouseup", onMouseUp);
     };
-  }, [isDragging, selected]);
+  }, [isDragging]);
+  useEffect(()=>{
+    if(selected.ref)
+    selected.ref.target.addEventListener("wheel", onWheel);
+    return ()=>
+    {
+      if(selected.ref)
+      selected.ref.target.removeEventListener("wheel", onWheel);
+    }
+  },[selected])
 
   useEffect(() => {
     fetch(window.location.origin + "/assets/poster3.svg")
@@ -213,15 +221,16 @@ const SVGEdit = () => {
             setSelected({
               type: "image",
               ref: event,
-              x: parseFloat(x),
-              y: parseFloat(y),
-              width: parseFloat(scaleX),
-              height: parseFloat(scaleY),
+              x:selected?.x?selected.x: parseFloat(x),
+              y:selected?.y?selected.y: parseFloat(y),
+              width:selected.width?selected.width: parseFloat(scaleX),
+              height:selected.height?selected.height: parseFloat(scaleY),
               isDragging: true,
             });
+            if(dragStart===null)
             setDragStart({
-              x: event.clientX - x,
-              y: event.clientY - y,
+              x: event.clientX ,
+              y: event.clientY,
             });
             setDragging(!isDragging);
 
@@ -253,7 +262,8 @@ const SVGEdit = () => {
 
   useEffect(() => {
     const handleMessage = (event) => {
-   
+      console.log(state)
+      updateState({type:"STAR_MAP_RESET",payload:{checked:null}})
         if (event.data== "star-map") {
           const images = document.getElementsByTagName("image");
             var index=0
@@ -264,7 +274,7 @@ const SVGEdit = () => {
               image.getAttribute("id") == "star-map" &&
               (state.selectedMoment==-1||state.selectedMoment==index)
             ) {
-                console.log("heere")
+                // console.log("heere")
               image.setAttribute("xlink:href", localStorage.getItem("map"));
               setStarMapLoaded(true)
               image.setAttribute("width", "1828");
@@ -285,17 +295,20 @@ const SVGEdit = () => {
     if (iframes.length > 0) {
       var index = 0;
       for (const iframe of iframes) {
-        if (state.starmap.checked)
+        if (state.starmap.checked){
           iframe.contentWindow.postMessage({
             type: "checked",
             id: ids[state.starmap.checked],
           });
-        else if (state.starmap.colorType)
+        }
+        else if (state.starmap.colorType){
           iframe.contentWindow.postMessage({
             type: "colors",
             id: ids[state.starmap.colorType],
             value: state.starmap.colorValue,
           });
+        
+        }
         else if (state.moments.length&&state.selectedMoment!==-1) {
           iframe.contentWindow.postMessage({
             type: "moment",
