@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { AvTimerSharp } from "@mui/icons-material";
 import Orders from "./profile-components/orders/Orders";
 import SavedOrders from "./profile-components/saved-orders/SavedOrders";
 import FavouriteOrder from "./profile-components/FavouriteOrder";
 import UpdateProfileInfo from "./profile-components/UpdateProfileInfo";
+import BillingAddress from "./profile-components/BillingAddress";
 
 const Profile = () => {
-  const [selectedItem, setSelectedItem] = useState("Update Profile Info");
+  const [selectedItem, setSelectedItem] = useState("Billing address");
   const sidebarItems = [
     {
       name: "Language",
@@ -31,7 +31,7 @@ const Profile = () => {
     },
     {
       name: "Billing address",
-      component: null,
+      component: <BillingAddress />,
       icon: "/public/assets/icons/address.png",
     },
     {

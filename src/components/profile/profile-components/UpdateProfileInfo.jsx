@@ -31,6 +31,12 @@ const UpdateProfileInfo = () => {
     password: "",
   });
   const [isOpen, setIsOpen] = useState(false);
+  const [isOtpVisible, setIsOtpVisible] = useState(false);
+  const [otp, setOtp] = useState(Array(4).fill(""));
+
+  const handleOpenOtp = (event) => {
+    setIsOtpVisible(true);
+  };
 
   const toggleDrawer = useCallback(
     (open) => (event) => {
@@ -41,6 +47,23 @@ const UpdateProfileInfo = () => {
         return;
       }
       setIsOpen(open);
+    },
+    []
+  );
+
+  // Add a separate state for the mail drawer
+  const [isMailDrawerOpen, setIsMailDrawerOpen] = useState(false);
+
+  // Add a separate toggle function for the mail drawer
+  const toggleMailDrawer = useCallback(
+    (open) => (event) => {
+      if (
+        event.type === "keydown" &&
+        (event.key === "Tab" || event.key === "Shift")
+      ) {
+        return;
+      }
+      setIsMailDrawerOpen(open);
     },
     []
   );
@@ -56,6 +79,15 @@ const UpdateProfileInfo = () => {
     e.preventDefault();
     // Submit the form
   }, []);
+
+  const handleChangeOtp = (element, index) => {
+    if (isNaN(element.value)) return;
+    otp[index] = element.value;
+    setOtp([...otp]);
+    if (element.nextSibling) {
+      element.nextSibling.focus();
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -159,74 +191,148 @@ const UpdateProfileInfo = () => {
                   <div className="flex justify-start">
                     <button
                       className="text-sm my-1 text-blue-400"
-                      onClick={toggleDrawer(true)}
+                      onClick={toggleMailDrawer(true)} // Use the new toggle function here
                     >
                       Change mail
                     </button>
                     <Drawer
                       anchor={"right"}
-                      open={isOpen}
-                      onClose={toggleDrawer(false)}
+                      open={isMailDrawerOpen} // Use the new state here
+                      onClose={toggleMailDrawer(false)} // Use the new toggle function here
                     >
                       <Box
                         sx={{ width: "450px" }}
                         role="presentation"
-                        onClick={toggleDrawer(false)}
+                        onClick={
+                          toggleMailDrawer(false) // Use the new toggle function here
+                        }
                       >
-                        <Box
-                          sx={{ display: "flex", justifyContent: "flex-start" }}
-                          className="background-color"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <IconButton
-                            onClick={toggleDrawer(false)}
-                            color="white"
-                          >
-                            <ArrowBackIosNew color="white" />
-                          </IconButton>
-                        </Box>
-                        <div
-                          className="flex flex-col gap-3 py-3 pt-6"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <h1 className="text-xl text-center font-bold text-blue-400">
-                            Change email
-                          </h1>
-                          <div className="flex space-x-4 mx-8 my-3">
-                            <img
-                              src="https://source.unsplash.com/100x100/?portrait"
-                              alt="Avatar"
-                              className="w-14 h-14 rounded-full"
-                            />
-                            <div className="flex flex-col gap-1 justify-center">
-                              <span className="text-sm font-bold">
-                                Leroy Jenkins
-                              </span>
-                              <span className="text-sm text-gray-400">
-                                leroyjenkins@gmail.com
-                              </span>
-                            </div>
-                          </div>
-                          <div className="flex flex-col gap-2 mx-8">
-                            <div className="flex flex-col gap-2 ">
-                              <label className="text-sm ml-1 font-bold">
-                                Enter your new email
-                              </label>
-                              <input
-                                type="text"
-                                className="rounded-2xl p-2 bg-white border border-blue-300"
-                                placeholder="Confirm your new email"
-                                onClick={(e) => e.stopPropagation()}
-                              />
-                            </div>
-                            <button
-                              className="text-sm bg-gradient-to-t from-[#4388EE] to-[#39BFF9] text-white px-5 py-3 rounded-2xl my-2 "
-                              type="submit"
+                        {!isOtpVisible ? (
+                          <>
+                            <Box
+                              sx={{
+                                display: "flex",
+                                justifyContent: "flex-start",
+                              }}
+                              className="background-color"
+                              onClick={(e) => e.stopPropagation()}
                             >
-                              Save
-                            </button>
-                          </div>
-                        </div>
+                              <IconButton
+                                onClick={
+                                  toggleMailDrawer(false) // Use the new toggle function here
+                                }
+                                color="white"
+                              >
+                                <ArrowBackIosNew color="white" />
+                              </IconButton>
+                            </Box>
+                            <div
+                              className="flex flex-col gap-3 py-3 pt-6"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <h1 className="text-xl text-center font-bold text-blue-400">
+                                Change email
+                              </h1>
+                              <div className="flex space-x-4 mx-8 my-3">
+                                <img
+                                  src="https://source.unsplash.com/100x100/?portrait"
+                                  alt="Avatar"
+                                  className="w-14 h-14 rounded-full"
+                                />
+                                <div className="flex flex-col gap-1 justify-center">
+                                  <span className="text-sm font-bold">
+                                    Leroy Jenkins
+                                  </span>
+                                  <span className="text-sm text-gray-400">
+                                    leroyjenkins@gmail.com
+                                  </span>
+                                </div>
+                              </div>
+                              <div className="flex flex-col gap-2 mx-8">
+                                <div className="flex flex-col gap-2 ">
+                                  <label className="text-sm ml-1 font-bold">
+                                    Enter your new email
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="rounded-2xl p-2 bg-white border border-blue-300"
+                                    placeholder="Confirm your new email"
+                                    onClick={(e) => e.stopPropagation()}
+                                  />
+                                </div>
+                                <button
+                                  className="text-sm bg-gradient-to-t from-[#4388EE] to-[#39BFF9] text-white px-5 py-3 rounded-2xl my-2 "
+                                  type="submit"
+                                  // Add an onClick handler here
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleOpenOtp(); // Use the new toggle function here
+                                  }}
+                                >
+                                  Save
+                                </button>
+                              </div>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <Box
+                              sx={{
+                                display: "flex",
+                                justifyContent: "flex-start",
+                              }}
+                              className="background-color"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <IconButton
+                                onClick={
+                                  toggleMailDrawer(false) // Use the new toggle function here
+                                }
+                                color="white"
+                              >
+                                <ArrowBackIosNew color="white" />
+                              </IconButton>
+                            </Box>
+                            <div
+                              className="flex flex-col gap-3 py-3 pt-6"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <h1 className="text-xl text-center font-bold text-blue-400">
+                                Change email
+                              </h1>
+
+                              <div className="flex flex-col gap-2 mx-8">
+                                <div>
+                                  <label className="text-sm ml-1 font-bold">
+                                    Enter your OTP
+                                  </label>
+                                  <div className="flex gap-2">
+                                    {Array(4)
+                                      .fill(0)
+                                      .map((_, index) => (
+                                        <input
+                                          key={index}
+                                          type="text"
+                                          maxLength="1"
+                                          className="  focus-visible:bg-fuchsia-100 focus-visible:border rounded-2xl p-2 bg-white border-2 border-black text-center w-14 h-10"
+                                          value={otp[index]}
+                                          onChange={(e) =>
+                                            handleChangeOtp(e.target, index)
+                                          }
+                                        />
+                                      ))}
+                                  </div>
+                                </div>
+                                <button
+                                  className="text-sm bg-gradient-to-t from-[#4388EE] to-[#39BFF9] text-white px-5 py-3 rounded-2xl my-2 "
+                                  type="submit"
+                                >
+                                  Save
+                                </button>
+                              </div>
+                            </div>
+                          </>
+                        )}
                       </Box>
                     </Drawer>
                   </div>
