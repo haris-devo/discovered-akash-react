@@ -62,6 +62,8 @@ const reducer = (state, action) => {
       return { ...state, showDiv: action.payload };
     case "STAR_MAP":
       return { ...state, starmap: { [action.type2]: action.payload } };
+    case "STAR_MAP_RESET":
+      return { ...state, starmap: { checked: null, colorType: null,colorValue: null, } };
     case "STAR_MAP_COLORS":
       return {
         ...state,
@@ -150,7 +152,8 @@ const Configurator = () => {
                   </div>
                 ))}
               </div>
-              <div className="w-full md:w-4/5 h-[30rem] max-h-auto">
+              <div className="w-full md:w-4/5 h-[30rem] max-h-auto" style={{position:'relative'}}>
+                <img src={window.location.origin+'/assets/icons/guide.png'} style={{position:'absolute', right:0,top:-42,cursor:'pointer'}} title="To adjust the image after upload, click on it use mouse wheel to zoom in and zoom out" width={30} height={30} />
                 <div className="bg-white h-full w-full rounded-2xl svg-div">
                   <SVGEdit
                     selectedImage={selectedImage}
@@ -184,15 +187,17 @@ const Configurator = () => {
                     >
                       <FormControl
                         // set the design
-                        className="bg-white border-b border-white  focus:outline-none p-3 rounded-2xl "
+                        className="bg-white border-white p-3 rounded-2xl "
                       >
-                        <InputLabel className="text-white">
+                        <InputLabel className="text-white" style={{backgroundColor:'#eaeaea'}} id="designFor">
                           Who Are You Designing For
                         </InputLabel>
                         <Select
                           value={designFor}
                           onChange={handleDesignForChange}
                           key="designFor"
+                          variant="filled"
+                          labelId="designFor"
                         >
                           <MenuItem value="Option 1" key="Option 1">
                             Option 1
@@ -207,13 +212,17 @@ const Configurator = () => {
                       </FormControl>
                       <FormControl
                         // set the design
-                        className="bg-white border-b border-white  focus:outline-none p-3 rounded-2xl"
+                        className="bg-white pb-2 rounded-2xl " style={{border:'1px solid black'}}
                       >
-                        <InputLabel className="text-white">Location</InputLabel>
+                        <InputLabel className="text-white" style={{backgroundColor:'#eaeaea'}} id="location">Location</InputLabel>
                         <Select
                           value={location}
                           onChange={handleLocationChange}
                           key="location"
+                          labelId="location"
+                          variant="filled"
+                        // className="bg-white"
+                          // variant="standard"
                         >
                           <MenuItem value="Option 1" key="Option 1">
                             Option 1

@@ -10,13 +10,22 @@ import React, { useContext, useRef } from "react";
 import { ConfiguratorContext } from "../Configurator";
 
 const AccordionDataCustomize = () => {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState({
+    panel1:false,
+    panel2:false,
+    panel3:false,
+    panel4:false,
+    panel5:false
+  });
   const [selectedFill,setSelectedFill]=React.useState(0)
   const [selectedStarFill,setSelectedStarFill]=React.useState(0)
   const [selectedText,setSelectedText]=React.useState(0)
   const [selectedStreetFill,setSelectedStreetFill]=React.useState(0)
   const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
+    setExpanded({
+      ...expanded,
+      [panel]:isExpanded?true:false
+    });
   };
   const {state,updateState}=useContext(ConfiguratorContext)
   const starColorRef=useRef()
@@ -51,7 +60,7 @@ const AccordionDataCustomize = () => {
       <div className="flex flex-col p-2">
         <Accordion
           id="panel1"
-          expanded={expanded === "panel1"}
+          expanded={expanded["panel1"]}
           onChange={handleChange("panel1")}
           className="border-0 outline-0 shadow-none "
           sx={{
@@ -112,7 +121,7 @@ const AccordionDataCustomize = () => {
       <div className="flex flex-col p-2">
         <Accordion
           id="panel2"
-          expanded={expanded === "panel2"}
+          expanded={expanded["panel2"]}
           onChange={handleChange("panel2")}
           className="border-0 outline-0 shadow-none "
           sx={{
@@ -177,7 +186,7 @@ const AccordionDataCustomize = () => {
       <div className="flex flex-col p-2">
         <Accordion
           id="panel3"
-          expanded={expanded === "panel3"}
+          expanded={expanded["panel3"]}
           onChange={handleChange("panel3")}
           className="border-0 outline-0 shadow-none "
           sx={{
@@ -232,7 +241,7 @@ const AccordionDataCustomize = () => {
                         id="Constellation Names"
                         name="Constellation Names"
                         defaultChecked
-                        onClick={()=>updateState({type:'STAR_MAP',type2:'checked',payload:'ctype'})}
+                        onClick={()=>updateState({type:'STAR_MAP',type2:'checked',payload:'cname'})}
                         className="text-blue-400 rounded-full appearance-none border border-gray-300 checked:bg-blue-400 checked:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 h-4 w-4"
                       />
                       <label htmlFor="Constellation Names">
@@ -290,7 +299,7 @@ const AccordionDataCustomize = () => {
                 </div>
                 <div className="flex w-full space-x-2">
                   <button onClick={()=>updateStarMapFill('#21618C',selectedStarFill==0?'bgcolor':'starcolor')} className=" rounded-lg p-5 px-10 bg-blue-300 border border-blue-700 text-white text-xs font-thin shadow-xl"></button>
-                  <button onClick={()=>updateStarMapFill('#922B21',selectedStarFill==0?'bgcolor':'starcolor')} className=" rounded-lg p-5 px-10 bg-red-700  text-black text-xs font-thin shadow-xl"></button>
+                  <button onClick={()=>updateStarMapFill('#E74C3C',selectedStarFill==0?'bgcolor':'starcolor')} className=" rounded-lg p-5 px-10 bg-red-700  text-black text-xs font-thin shadow-xl"></button>
                   <button onClick={()=>updateStarMapFill('black',selectedStarFill==0?'bgcolor':'starcolor')} className=" rounded-lg p-5 px-10 bg-black  text-black text-xs font-thin shadow-xl"></button>
                 </div>
               </div>
@@ -301,7 +310,7 @@ const AccordionDataCustomize = () => {
       <div className="flex flex-col p-2">
         <Accordion
           id="panel4"
-          expanded={expanded === "panel4"}
+          expanded={expanded["panel4"]}
           onChange={handleChange("panel4")}
           className="border-0 outline-0 shadow-none "
           sx={{
@@ -404,7 +413,7 @@ const AccordionDataCustomize = () => {
       <div className="flex flex-col p-2">
         <Accordion
           id="panel5"
-          expanded={expanded === "panel5"}
+          expanded={expanded["panel5"]}
           onChange={handleChange("panel5")}
           className="border-0 outline-0 shadow-none "
           sx={{
