@@ -6,7 +6,7 @@ import UpdateProfileInfo from "./profile-components/UpdateProfileInfo";
 import BillingAddress from "./profile-components/BillingAddress";
 
 const Profile = () => {
-  const [selectedItem, setSelectedItem] = useState("Billing address");
+  const [selectedItem, setSelectedItem] = useState("Your Orders");
   const sidebarItems = [
     {
       name: "Language",
