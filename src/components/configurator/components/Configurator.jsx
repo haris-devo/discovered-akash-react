@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback, useEffect } from "react";
+import React, { useReducer, useCallback, useEffect, useState } from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { images } from "../../../constants/RandomURL";
 import DesigningConfigurator from "./DesigningConfigurator";
@@ -63,7 +63,10 @@ const reducer = (state, action) => {
     case "STAR_MAP":
       return { ...state, starmap: { [action.type2]: action.payload } };
     case "STAR_MAP_RESET":
-      return { ...state, starmap: { checked: null, colorType: null,colorValue: null, } };
+      return {
+        ...state,
+        starmap: { checked: null, colorType: null, colorValue: null },
+      };
     case "STAR_MAP_COLORS":
       return {
         ...state,
@@ -98,6 +101,7 @@ const reducer = (state, action) => {
 
 const Configurator = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [isHovered, setIsHovered] = useState(false);
   useEffect(() => {
     console.log(state);
   }, [state]);
@@ -127,6 +131,7 @@ const Configurator = () => {
     <ConfiguratorContext.Provider value={{ state, updateState: dispatch }}>
       <div className="container mx-auto px-4 md:px-28 max-h-auto h-auto md:py-14 py-2 font-inter">
         <h1 className="text-4xl font-bold">Name Template</h1>
+
         <div className="flex flex-col md:flex-row md:space-x-6 my-10 h-5/6 md:justify-center">
           <div
             className={`w-full md:w-2/4   ${
@@ -152,9 +157,27 @@ const Configurator = () => {
                   </div>
                 ))}
               </div>
-              <div className="w-full md:w-4/5 h-[30rem] max-h-auto" style={{position:'relative'}}>
-                <img src={window.location.origin+'/assets/icons/guide.png'} style={{position:'absolute', right:0,top:-42,cursor:'pointer'}} title="To adjust the image after upload, click on it use mouse wheel to zoom in and zoom out" width={30} height={30} />
+              <div className="w-full md:w-4/5 h-[30rem] max-h-auto relative">
                 <div className="bg-white h-full w-full rounded-2xl svg-div">
+                  <div style={{ position: "absolute", right: "5%", top: -42 }}>
+                    <img
+                      src={window.location.origin + "/assets/icons/guide.png"}
+                      className="w-8 h-8 cursor-pointer"
+                      alt="Guide"
+                      width={30}
+                      height={30}
+                      onMouseEnter={() => setIsHovered(true)}
+                      onMouseLeave={() => setIsHovered(false)}
+                    />
+                    {isHovered && (
+                      <div className="absolute right-0 -top-24 md:-left-32 mt-12 p-2 bg-gray-700 text-white text-xs rounded shadow-lg w-72">
+                        <ul className="list-disc list-inside">
+                          <li>To adjust the image after upload, click on it</li>
+                          <li>Use mouse wheel to zoom in and zoom out</li>
+                        </ul>
+                      </div>
+                    )}
+                  </div>
                   <SVGEdit
                     selectedImage={selectedImage}
                     showDiv={showDiv}
@@ -189,7 +212,11 @@ const Configurator = () => {
                         // set the design
                         className="bg-white border-white p-3 rounded-2xl "
                       >
-                        <InputLabel className="text-white" style={{backgroundColor:'#eaeaea'}} id="designFor">
+                        <InputLabel
+                          className="text-white"
+                          style={{ backgroundColor: "#eaeaea" }}
+                          id="designFor"
+                        >
                           Who Are You Designing For
                         </InputLabel>
                         <Select
@@ -212,16 +239,23 @@ const Configurator = () => {
                       </FormControl>
                       <FormControl
                         // set the design
-                        className="bg-white pb-2 rounded-2xl " style={{border:'1px solid black'}}
+                        className="bg-white pb-2 rounded-2xl "
+                        style={{ border: "1px solid black" }}
                       >
-                        <InputLabel className="text-white" style={{backgroundColor:'#eaeaea'}} id="location">Location</InputLabel>
+                        <InputLabel
+                          className="text-white"
+                          style={{ backgroundColor: "#eaeaea" }}
+                          id="location"
+                        >
+                          Location
+                        </InputLabel>
                         <Select
                           value={location}
                           onChange={handleLocationChange}
                           key="location"
                           labelId="location"
                           variant="filled"
-                        // className="bg-white"
+                          // className="bg-white"
                           // variant="standard"
                         >
                           <MenuItem value="Option 1" key="Option 1">
