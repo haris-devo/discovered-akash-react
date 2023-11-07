@@ -4,6 +4,7 @@ import Navbar from "../components/landing/herosection/Navbar";
 import Configurator from "../components/configurator/components/Configurator";
 import Footer from "../components/footer/Footer";
 import Profile from "../components/profile/Profile";
+import Cart from "../components/cart/Cart";
 
 const Routers = () => {
   return (
@@ -15,6 +16,7 @@ const Routers = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path="/configurator" element={<Configurator />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       {/* <Footer /> */}
     </>
