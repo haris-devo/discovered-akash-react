@@ -44,8 +44,8 @@ const uploadFile=(e,index)=>{
   const file = e.target.files[0]
   Resizer.imageFileResizer(
       file,
-      700, // New width (adjust as needed)
-      700, // New height (adjust as needed)
+      1500, // New width (adjust as needed)
+      1500, // New height (adjust as needed)
       'png', // Format (JPEG, PNG, etc.)
       100, // Quality (adjust as needed)
       0, // Rotation (0 for no rotation)
@@ -53,8 +53,24 @@ const uploadFile=(e,index)=>{
           console.log(uri)
           // selected.ref.target.setAttribute('xlink:href',uri)
           state.uploadedImages[index].ref.setAttribute('xlink:href',uri)
-          state.uploadedImages[index].ref.setAttribute('width',1000)
-          state.uploadedImages[index].ref.setAttribute('height',1000)
+         
+          const img=document.createElement('img')
+          img.src = uri;
+          img.onload = () => {
+            console.log(img.height,img.width)
+            const width=img.width>img.height?img.width:-img.width
+            const height=img.height>img.width?img.height:-img.height
+            const factor=img.width<img.height?img.height/img.width:img.width/img.height
+            const multiply=factor>1.6?2:1
+            const finalwidth=(img.width+(width+height))*multiply
+            const finalheight=(img.height+(width+height))*multiply
+            console.log(finalheight,finalwidth)
+             state.uploadedImages[index].ref.setAttribute('width',finalwidth<1000?1100:finalwidth)
+            state.uploadedImages[index].ref.setAttribute('height',finalheight<1000?1100:finalheight)
+            state.uploadedImages[index].ref.setAttribute('x',finalheight<1200?256:98)
+          state.uploadedImages[index].ref.setAttribute('y',finalwidth<1200?-4:-323)
+          
+          };
           
    
       },

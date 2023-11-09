@@ -1,8 +1,10 @@
-import React, { memo, useContext, useEffect, useRef, useState } from "react";
+import React, { memo, useContext, useEffect, useImperativeHandle, useRef, useState } from "react";
 import StreetMap from "./StreetMap";
 import { ConfiguratorContext } from "../configurator/components/Configurator";
 import AutocompleteInput from "./Autocomplete";
 import { Backdrop, CircularProgress } from "@mui/material";
+import domtoimage from "dom-to-image-more";
+import { forwardRef } from "react";
 const ids = {
   sname: "stars-propername",
   pname: "planets-names",
@@ -12,7 +14,7 @@ const ids = {
   scolor: "stars-style-fill",
   bgcolor: "background-fill",
 };
-const SVGEdit = () => {
+const SVGEdit = forwardRef((props, ref) => {
   const [svgContent, setSvgContent] = useState(null);
   const svgref = useRef();
   const { state, updateState } = useContext(ConfiguratorContext);
@@ -34,6 +36,7 @@ const SVGEdit = () => {
     e.preventDefault();
 
     // Set the resize factor (adjust as needed)
+    console.log(selected)
     const resizeFactor = 10;
     // Calculate new dimension
     const newWidth =
@@ -62,19 +65,22 @@ const SVGEdit = () => {
   useEffect(() => {
     const onMouseMove = (e) => {
       if (!isDragging || !selected.ref) return;
-      console.log(dragStart,e.clientX,e.clientY)
       const dx = e.clientX - dragStart.x;
       const dy = e.clientY - dragStart.y;
       const conX = dx < 0 ? -1 : 1;
       const conY = dy < 0 ? -1 : 1;
-
-      const newX = selected.x + dx  ;
-      const newY = selected.y + dy ;
-
+      const imageWidth = selected.ref.target.getAttribute('width');
+      const imageHeight = selected.ref.target.getAttribute('height');
+      console.log(imageWidth,imageHeight)
+      const selectedX=parseFloat(selected.ref.target.getAttribute('x'))
+      const selectedY=parseFloat(selected.ref.target.getAttribute('y'))
+      const newX = selectedX + (dx +(10*dx))
+      const newY = selectedY + (dy +(10*dy)) 
+      
       selected.ref.target.setAttribute("x", newX);
       selected.ref.target.setAttribute("y", newY);
 
-      // setDragStart({ x: e.clientX, y: e.clientY });
+      setDragStart({ x: e.clientX, y: e.clientY });
       setSelected({ ...selected, x: newX, y: newY });
     };
 
@@ -82,18 +88,17 @@ const SVGEdit = () => {
       setDragStart(null)
       setDragging(false);
     };
-    if (selected.ref) {
+    if(selected.ref)
       selected.ref.target.addEventListener("mousemove", onMouseMove);
-    }
+ 
     document.addEventListener("mouseup", onMouseUp);
     return () => {
-      if (selected.ref) {
+      if(selected.ref)
         selected.ref.target.removeEventListener("mousemove", onMouseMove);
 
-      }
       document.removeEventListener("mouseup", onMouseUp);
     };
-  }, [isDragging]);
+  }, [isDragging,dragStart]);
   useEffect(()=>{
     if(selected.ref)
     selected.ref.target.addEventListener("wheel", onWheel);
@@ -110,6 +115,7 @@ const SVGEdit = () => {
       .then((data) => setSvgContent(data))
       .catch((error) => console.error("Error fetching the SVG:", error));
   }, []);
+
   const fileref = useRef();
   // console.log(svgContent)
   // const [selected,setSelected]=useState(null)
@@ -216,8 +222,8 @@ const SVGEdit = () => {
               : transform[1].substring(0, transform[1].length - 1);
             const scaleX = event.target.getAttribute("width");
             const scaleY = event.target.getAttribute("height");
-            // image.setAttribute('x',x)
-            // image.setAttribute('y',y)
+            event.target.setAttribute('x',x)
+            event.target.setAttribute('y',y)
             setSelected({
               type: "image",
               ref: event,
@@ -322,6 +328,16 @@ const SVGEdit = () => {
       }
     }
   }, [state]);
+  useImperativeHandle(ref, () => ({
+    download() {
+      domtoimage.toPng(svgref.current.children[0]).then(res=>{
+          const a=document.createElement('a');
+          a.href=res;
+          a.download="poster.png";
+          a.click();
+      })
+    }
+  }));
   return (
     <>
       <div
@@ -351,6 +367,6 @@ const SVGEdit = () => {
       {/* <AutocompleteInput/> */}
     </>
   );
-};
+});
 
 export default memo(SVGEdit);

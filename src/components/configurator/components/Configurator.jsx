@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback, useEffect, useState } from "react";
+import React, { useReducer, useCallback, useEffect, useState,useRef } from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { images } from "../../../constants/RandomURL";
 import DesigningConfigurator from "./DesigningConfigurator";
@@ -102,6 +102,10 @@ const reducer = (state, action) => {
 const Configurator = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [isHovered, setIsHovered] = useState(false);
+  const SVGref=useRef()
+  const downloadPoster=()=>{
+    SVGref.current.download()
+  }
   useEffect(() => {
     console.log(state);
   }, [state]);
@@ -182,6 +186,7 @@ const Configurator = () => {
                     selectedImage={selectedImage}
                     showDiv={showDiv}
                     dispatch={dispatch}
+                    ref={SVGref}
                   />
                 </div>
               </div>
@@ -301,7 +306,7 @@ const Configurator = () => {
               </div>
             </div>
           ) : (
-            <DesigningConfigurator />
+            <DesigningConfigurator download={downloadPoster}/>
           )}
         </div>
       </div>

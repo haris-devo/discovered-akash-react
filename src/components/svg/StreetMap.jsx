@@ -22,6 +22,13 @@ function StreetMap({ setImage, svg, state }) {
               "border-style: none!important"
             );
             setImage(res2);
+            // const image=document.createElement('img')
+            
+            // domtoimage.toPng(image).then(res3=>{
+            //   setImage(res3);
+            //   })
+            // image.src=res2;
+           
             // download(mapRef.current,"new")
             // handleCapture2()
           });

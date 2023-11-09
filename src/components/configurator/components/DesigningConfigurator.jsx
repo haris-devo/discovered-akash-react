@@ -4,7 +4,7 @@ import AccordionDataDesign from "./accordion-data/AccordionDataDesign";
 import AccordionDataMoment from "./accordion-data/AccordionDataMoment";
 import AccordionDataCustomize from "./accordion-data/AccordionDataCustomize";
 
-const DesigningConfigurator = () => {
+const DesigningConfigurator = ({download}) => {
   const [showDiv, setShowDiv] = useState("Design");
 
   const handleButtonClick = (buttonName) => {
@@ -16,7 +16,7 @@ const DesigningConfigurator = () => {
       case "Moment":
         return (
           <div className="h-full design-div">
-            <div className="flex flex-col md:space-x-3 h-full gap-5" style={{height: '347px',overflow: 'scroll',}}>
+            <div className="flex flex-col md:space-x-3 h-full gap-5" style={{height: '44vh',overflow: 'scroll',}}>
               <h1 className="font-semibold my-6 mb-3  ">
                 Select your favorite design:{" "}
               </h1>
@@ -47,6 +47,7 @@ const DesigningConfigurator = () => {
                   <button
                     className="text-black border-2 px-6 py-4 rounded-2xl flex items-center space-x-2"
                     // onClick={() => setShowDiv("Size")}
+                    onClick={download}
                   >
                     Save
                     {/* <span className="ml-2">
@@ -69,7 +70,7 @@ const DesigningConfigurator = () => {
         return (
           <div className="h-full design-div">
             <div className="flex flex-col space-x-3 ">
-            <div className="flex flex-col md:space-x-3 h-full gap-5" style={{height: '347px',overflow: 'scroll',}}>
+            <div className="flex flex-col md:space-x-3 h-full gap-5" style={{height: '44vh',overflow: 'scroll',}}>
               <h1 className="font-semibold my-6 mb-3">
                 Select your favorite design:{" "}
               </h1>
@@ -100,6 +101,7 @@ const DesigningConfigurator = () => {
                   <button
                     className="text-black border-2 px-6 py-4 rounded-2xl flex items-center space-x-2"
                     // onClick={() => setShowDiv("Size")}
+                    onClick={download}
                   >
                     Save
                     {/* <span className="ml-2">
@@ -123,7 +125,7 @@ const DesigningConfigurator = () => {
         return (
           <div className="h-full design-div">
             <div className="flex flex-col space-x-3 ">
-            <div className="flex flex-col md:space-x-3 h-full gap-5" style={{height: '347px',overflow: 'scroll',}}>
+            <div className="flex flex-col md:space-x-3 h-full gap-5" style={{height: '44vh',overflow: 'scroll',}}>
               <h1 className="font-semibold my-6 mb-3">
                 Select your favorite design:{" "}
               </h1>
@@ -201,6 +203,7 @@ const DesigningConfigurator = () => {
                   <button
                     className="text-black border-2 px-6 py-4 rounded-2xl flex items-center space-x-2"
                     // onClick={() => setShowDiv("Size")}
+                    onClick={download}
                   >
                     Save
                     {/* <span className="ml-2">
@@ -224,7 +227,7 @@ const DesigningConfigurator = () => {
         return (
           <div className="h-full design-div">
             <div className="flex flex-col space-x-3 ">
-            <div className="flex flex-col md:space-x-3 h-full gap-5" style={{height: '347px',overflow: 'scroll',}}>
+            <div className="flex flex-col md:space-x-3 h-full gap-5" style={{height: '44vh',overflow: 'scroll',}}>
               <h1 className="font-semibold my-6 mb-3">
                 Select your favorite design:{" "}
               </h1>
@@ -255,6 +258,7 @@ const DesigningConfigurator = () => {
                   <button
                     className="text-black border-2 px-6 py-4 rounded-2xl flex items-center space-x-2"
                     // onClick={() => setShowDiv("Size")}
+                    onClick={download}
                   >
                     Save
                     {/* <span className="ml-2">
